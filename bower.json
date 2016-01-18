@@ -14,10 +14,10 @@
     "Angular",
     "Ionic",
     "Cordova",
-    "Mobile",
-    "Application",
-    "Utilities",
-    "Utility"
+    "mobile",
+    "application",
+    "utilities",
+    "utility"
   ],
   "authors": [
     "Sebastien Pittion <sp@fing.pro> (https://twitter.com/fingerproof)"
