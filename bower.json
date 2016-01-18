@@ -3,11 +3,11 @@
   "description": "A set of utilities for Ionic applications",
   "homepage": "https://github.com/fingerproof/ionic-fp-utils",
   "main": [
+    "fp.utils/utils.js",
     "fp.utils/cache-utils.js",
     "fp.utils/cordova-utils.js",
-    "fp.utils/interceptor-utils.js",
     "fp.utils/template-utils.js",
-    "fp.utils/utils.js"
+    "fp.utils/interceptor-utils.js"
   ],
   "license": "MIT",
   "keywords": [
