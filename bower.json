@@ -1,0 +1,38 @@
+{
+  "name": "ionic-fp-utils",
+  "description": "A set of utilities for Ionic applications",
+  "homepage": "https://github.com/fingerproof/ionic-fp-utils",
+  "main": [
+    "fp.utils/cache-utils.js",
+    "fp.utils/cordova-utils.js",
+    "fp.utils/interceptor-utils.js",
+    "fp.utils/template-utils.js",
+    "fp.utils/utils.js"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Angular",
+    "Ionic",
+    "Cordova",
+    "Mobile",
+    "Application",
+    "Utilities",
+    "Utility"
+  ],
+  "authors": [
+    "Sebastien Pittion <sp@fing.pro> (https://twitter.com/fingerproof)"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "3.10.1",
+    "ionic": "1.1.1",
+    "ngCordova": "0.1.23-alpha",
+    "angular-cache": "4.4.2"
+  }
+}
