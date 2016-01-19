@@ -5,6 +5,7 @@
   "main": [
     "fp.utils/utils.js",
     "fp.utils/cache-utils.js",
+    "fp.utils/state-utils.js",
     "fp.utils/cordova-utils.js",
     "fp.utils/template-utils.js",
     "fp.utils/interceptor-utils.js"
