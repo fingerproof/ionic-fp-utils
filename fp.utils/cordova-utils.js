@@ -71,7 +71,8 @@
       return $cordovaToast.showShortCenter(message);
     });
 
-    // Broadcast 'paused' and 'resumed' events when the app runs in Cordova.
+    // Broadcast 'fpUtils.cordova.'-prefixed 'paused' and 'resumed'
+    // events on the root scope when the app runs in Cordova.
     service.callWhenReady(function () {
       var broadcast = getBroadcaster(['paused', 'resumed']);
       $ionicPlatform.on('resume', broadcast.resumed);

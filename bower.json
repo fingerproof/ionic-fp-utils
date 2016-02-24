@@ -8,7 +8,8 @@
     "fp.utils/state-utils.js",
     "fp.utils/cordova-utils.js",
     "fp.utils/template-utils.js",
-    "fp.utils/interceptor-utils.js"
+    "fp.utils/interceptor-utils.js",
+    "fp.utils/loading-interceptor.js"
   ],
   "license": "MIT",
   "keywords": [
@@ -32,8 +33,8 @@
   ],
   "dependencies": {
     "lodash": "3.10.1",
-    "ionic": "1.1.1",
-    "ngCordova": "0.1.23-alpha",
-    "angular-cache": "4.4.2"
+    "ionic": "1.2.4",
+    "ngCordova": "0.1.24-alpha",
+    "angular-cache": "4.5.0"
   }
 }
