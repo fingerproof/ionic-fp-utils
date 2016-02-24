@@ -8,7 +8,8 @@
     "fp.utils/state-utils.js",
     "fp.utils/cordova-utils.js",
     "fp.utils/template-utils.js",
-    "fp.utils/interceptor-utils.js"
+    "fp.utils/interceptor-utils.js",
+    "fp.utils/loading-interceptor.js"
   ],
   "license": "MIT",
   "keywords": [
