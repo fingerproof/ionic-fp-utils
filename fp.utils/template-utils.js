@@ -75,11 +75,14 @@
      * @method getUrlFromModule
      * @param {Object} module
      * @param {String} [file] - Last part of the module name by default.
+     *                        If the value ends with a forward slash, the
+     *                        last part of the module name will be added.
      * @return {String}
      */
     provider.getUrlFromModule = function (module, file) {
-      var validFileName = _.isString(file);
-      if (!validFileName) { file = provider.getLastModuleNamePart(module); }
+      if (!_.isString(file)) { file = ''; }
+      var useDefault = !file || /\/$/.test(file);
+      if (useDefault) { file += provider.getLastModuleNamePart(module); }
       return provider.getModuleUrl(module) + file + '.html';
     };
 
