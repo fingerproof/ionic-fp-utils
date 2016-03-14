@@ -18,7 +18,9 @@
     var service = this;
 
     /**
-     * Broadcast a given event only when dealing with API requests.
+     * Broadcast a given event (passing the request config object)
+     * only when dealing with API requests that do not have
+     * a truthy skipFPLoadingInterceptor setup in config.
      * @private
      * @function broadcast
      * @param {String} event
@@ -26,7 +28,8 @@
      */
     function broadcast(event, config) {
       var out = /^http(?:s)?:\/\//.test(config.url);
-      if (out) { $rootScope.$broadcast(camelCasedName + '.loading.' + event); }
+      if (!out || config.skipFPLoadingInterceptor) { return; }
+      $rootScope.$broadcast(camelCasedName + '.loading.' + event, config);
     }
 
     /**
