@@ -9,7 +9,8 @@
     "fp.utils/cordova-utils.js",
     "fp.utils/template-utils.js",
     "fp.utils/interceptor-utils.js",
-    "fp.utils/loading-interceptor.js"
+    "fp.utils/loading-interceptor.js",
+    "fp.utils/open-links-in-iab.directive.js"
   ],
   "license": "MIT",
   "keywords": [
