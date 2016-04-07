@@ -25,7 +25,7 @@
      */
     function getBroadcaster(name) {
       var isArray = _.isArray(name);
-      if (isArray) { return _.object(name, _.map(name, getBroadcaster)); }
+      if (isArray) { return _.zipObject(name, _.map(name, getBroadcaster)); }
       name = camelCasedName + '.cordova.' + name;
       return _.bind($rootScope.$broadcast, $rootScope, name);
     }
