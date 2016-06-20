@@ -26,7 +26,17 @@
      * @function noop
      * @param {Object} event - A DOM click event object.
      */
-    function noop(event) { event.preventDefault(); };
+    function noop(event) { event.preventDefault(); }
+
+    /**
+     * Get the attribute value given a name that can be prefixed with 'data-'.
+     * @param {Element} el
+     * @param {String} name
+     * @return {String|null}
+     */
+    function getAttribute(el, name) {
+      return el.getAttribute(name) || el.getAttribute('data-' + name) || null;
+    }
 
     /**
      * Open a link via the In App Browser plugin.
@@ -35,7 +45,9 @@
      * @param {String} target - A valid In App Browser target value.
      */
     function open(target) {
-      $cordovaInAppBrowser.open(encodeURI(this.href), target);
+      // Allow the target to be overridden using a (data-)iab-target attribute.
+      var iabTarget = getAttribute(this, 'iab-target') || target;
+      $cordovaInAppBrowser.open(encodeURI(this.href), iabTarget);
     }
 
     /**
