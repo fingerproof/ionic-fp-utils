@@ -47,7 +47,7 @@
     function open(target) {
       // Allow the target to be overridden using a (data-)iab-target attribute.
       var iabTarget = getAttribute(this, 'iab-target') || target;
-      $cordovaInAppBrowser.open(encodeURI(this.href), iabTarget);
+      $cordovaInAppBrowser.open(this.href, iabTarget);
     }
 
     /**
