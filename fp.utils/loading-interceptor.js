@@ -27,7 +27,7 @@
      * @param {Object} config - Angular $http config object.
      */
     function broadcast(event, config) {
-      var out = /^http(?:s)?:\/\//.test(config.url);
+      var out = /^(:?http(:?s)?:)?\/\//.test(config.url);
       if (!out || config.skipFPLoadingInterceptor) { return; }
       $rootScope.$broadcast(camelCasedName + '.loading.' + event, config);
     }
