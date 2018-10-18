@@ -6,15 +6,15 @@
 
   /**
    * The default modules path.
-   * @constant MODULES_PATH
-   * @type {String}
+   * @constant
+   * @type {string}
    */
   var MODULES_PATH = 'modules/';
 
   /**
    * The default module name separator.
-   * @constant MODULE_NAME_SEPARATOR
-   * @type {String}
+   * @constant
+   * @type {string}
    */
   var MODULE_NAME_SEPARATOR = '.';
 

@@ -19,9 +19,10 @@
 
     /**
      * Get root scope broadcaters given event names.
-     * @method getBroadcaster
-     * @param {String|Array} name
-     * @return {Function|Object}
+     * @private
+     * @function
+     * @param {string|string[]} name
+     * @return {Function|object}
      */
     function getBroadcaster(name) {
       var isArray = _.isArray(name);
@@ -32,14 +33,12 @@
 
     /**
      * Check whether the app is running in a WebView or not.
-     * @method isCordova
-     * @return {Boolean}
+     * @return {boolean}
      */
     service.isCordova = function () { return ionic.Platform.isWebView(); };
 
     /**
      * Call a given callback when Cordova is available and ready.
-     * @method callWhenReady
      * @param {Function} cb
      * @return {Promise}
      */
@@ -50,7 +49,6 @@
 
     /**
      * Get a callback that would be called when Cordova is available and ready.
-     * @method whenReady
      * @param {Function} cb
      * @return {Function}
      */
@@ -63,8 +61,7 @@
 
     /**
      * Show a toast at the center of the screen for a short duration.
-     * @method showToast
-     * @param {String} message
+     * @param {string} message
      * @return {Promise}
      */
     service.showToast = service.whenReady(function (message) {

@@ -6,9 +6,9 @@
 
   /**
    * Some state utilities.
-   * @constructor StateUtils
-   * @param {Object} $q - The Angular $q service.
-   * @param {Object} $state - The Angular UI Router $state service.
+   * @constructor
+   * @param {object} $q - The Angular $q service.
+   * @param {object} $state - The Angular UI Router $state service.
    */
   function StateUtils($q, $state) {
     var service = this;
@@ -17,10 +17,10 @@
      * Go to a given nested state, making sure to enter parent states too.
      * Be careful, this function mutates the passed `state` array.
      * @private
-     * @function goToNested
-     * @param {Array} states - An array of state names representing a path.
-     * @param {Object} params - Optional parameters to pass to every state.
-     * @param {Object} [current] - The current state object.
+     * @function
+     * @param {string[]} states - An array of state names representing a path.
+     * @param {object} params - Optional parameters to pass to every state.
+     * @param {object} [current] - The current state object.
      * @return {Promise} Resolved with the current state object.
      */
     function goToNested(states, params, current) {
@@ -41,9 +41,8 @@
 
     /**
      * Sanitize a given states path to a straight from root valid path.
-     * @method sanitize
-     * @param {String} state - Should point to state using a full path.
-     * @return {String}
+     * @param {string} state - Should point to state using a full path.
+     * @return {string}
      */
     service.sanitize = function (state) {
       if (!_.isString(state)) { return ''; }
@@ -58,9 +57,8 @@
 
     /**
      * Go to a given state, if nested make sure to enter parent states too.
-     * @method goTo
-     * @param {String} state - Should point to state using a full path.
-     * @param {Object} params - Optional parameters to pass to every state.
+     * @param {string} state - Should point to state using a full path.
+     * @param {object} params - Optional parameters to pass to every state.
      * @return {Promise}
      */
     service.goTo = function (state, params) {
