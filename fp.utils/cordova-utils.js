@@ -99,9 +99,6 @@
      * @return {Function}
      */
     service.ifPlatformWhenReady = function (platform, cb, fallback) {
-      // var nok = !service.isPlatform(platform);
-      // if (nok) { cb = _.isUndefined(no) ? _.noop : _.partial(_.identity, no); }
-      // return service.whenReady(cb);
       var matches = service.isPlatform(platform);
       return service.whenReady(matches ? cb : _.partial(_.identity, fallback));
     }
