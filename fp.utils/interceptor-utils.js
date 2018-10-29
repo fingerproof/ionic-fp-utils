@@ -6,17 +6,16 @@
 
   /**
    * Some interceptor utilities.
-   * @constructor InterceptorUtils
-   * @param {Object} $injector - The Angular $injector service.
+   * @constructor
+   * @param {object} $injector - The Angular $injector service.
    */
   function InterceptorUtils($injector) {
     var service = this;
 
     /**
      * Convert a given value to an array if not already one.
-     * @method toArray
-     * @param {*} value
-     * @return {Array}
+     * @param {any} value
+     * @return {any[]}
      */
     service.toArray = function (value) {
       if (_.isArray(value)) { return value; }
@@ -25,11 +24,10 @@
 
     /**
      * Get an array given two values that can be arrays.
-     * @method concat
-     * @param {*} valueA
-     * @param {*} valueB
-     * @param {Number} [skip=0] - Items to drop from valueB
-     * @return {Array} [description]
+     * @param {any} valueA
+     * @param {any} valueB
+     * @param {number} [skip=0] - Items to drop from valueB
+     * @return {any[]}
      */
     service.concat = function (valueA, valueB, skip) {
       valueB = service.toArray(valueB);
@@ -39,14 +37,13 @@
 
     /**
      * Apply a given method on a given object passing optional arguments.
-     * @method applyMethod
-     * @param {Object} host
-     * @param {String} method
-     * @param {Object} [opt]
-     * @param {*} [opt.a=[]]
-     * @param {*} [opt.b=[]]
-     * @param {*} [opt.skip=0]
-     * @return {[type]} [description]
+     * @param {object} host
+     * @param {string} method
+     * @param {object} [opt]
+     * @param {any} [opt.a=[]]
+     * @param {any} [opt.b=[]]
+     * @param {number} [opt.skip=0]
+     * @return {any}
      */
     service.applyMethod = function (host, method, opt) {
       opt = _.defaults({}, opt, { a: [], b: [] });
@@ -55,10 +52,9 @@
 
     /**
      * Limit a given function parameters to a given number.
-     * @method limitParams
      * @param {Function} callee
-     * @param {Number} [limit=1]
-     * @param {*} [context]
+     * @param {number} [limit=1]
+     * @param {any} [context]
      * @return {Function}
      */
     service.limitParams = function (callee, limit, context) {
@@ -68,13 +64,11 @@
 
     /**
      * Make sure to lock a given function with only the given parameters.
-     * @method lockParams
      * @param {Function} callee
-     * @param {*} params
-     * @param {*} [context]
+     * @param {any} params
      * @return {Function}
      */
-    service.lockParams = function (callee, params/*, context*/) {
+    service.lockParams = function (callee, params) {
       params = service.toArray(params);
       var options = { a: [callee, params.length], b: arguments, skip: 2 };
       var limited = service.applyMethod(service, 'limitParams', options);
@@ -83,9 +77,8 @@
 
     /**
      * Get around circular dependencies error.
-     * @method getCircularDeps
-     * @param {Array|String} names - The dependencies names.
-     * @return {Object|Function}
+     * @param {string|string[]} names - The dependencies names.
+     * @return {object|Function}
      */
     service.getCircularDeps = _.memoize(function (names) {
       names = service.toArray(names);
@@ -96,9 +89,8 @@
 
     /**
      * Test if a requested resource requires authentication.
-     * @method isUnauthorized
-     * @param {Object} response - Angular $http response object.
-     * @return {Boolean}
+     * @param {object} response - Angular $http response object.
+     * @return {boolean}
      */
     service.isUnauthorized = function (response) {
       return !response.config.skipAuthorization && response.status === 401;
@@ -106,8 +98,7 @@
 
     /**
      * Retry a failed request given its response, maximum 10 times.
-     * @method retryFailed
-     * @param {Object} response - Angular $http response object.
+     * @param {object} response - Angular $http response object.
      * @return {Promise}
      */
     service.retryFailed = function (response) {
@@ -120,8 +111,7 @@
 
     /**
      * Get a function which will retry a failed request when called.
-     * @method getFailedRetryer
-     * @param {Object} [response] - Angular $http response object.
+     * @param {object} [response] - Angular $http response object.
      * @return {Function}
      */
     service.getFailedRetryer = function (response) {
