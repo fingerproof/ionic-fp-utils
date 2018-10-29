@@ -6,12 +6,12 @@
 
   /**
    * The fpOpenLinksInIab directive.
-   * @function openLinksInIab
-   * @param {Object} $q - Angular's $q service.
-   * @param {Object} $cordovaEmailComposer - ngCordova's $cordovaEmailComposer.
-   * @param {Object} $cordovaInAppBrowser - ngCordova's $cordovaInAppBrowser.
-   * @param {Object} cordovaUtils - Some Cordova utilities.
-   * @return {Object}
+   * @function
+   * @param {object} $q - Angular's $q service.
+   * @param {object} $cordovaEmailComposer - ngCordova's $cordovaEmailComposer.
+   * @param {object} $cordovaInAppBrowser - ngCordova's $cordovaInAppBrowser.
+   * @param {object} cordovaUtils - Some Cordova utilities.
+   * @return {object}
    */
   function openLinksInIab(
     $q,
@@ -23,16 +23,18 @@
     /**
      * Prevent the default browser behavior.
      * @private
-     * @function noop
-     * @param {Object} event - A DOM click event object.
+     * @function
+     * @param {object} event - A DOM click event object.
      */
     function noop(event) { event.preventDefault(); }
 
     /**
      * Get the attribute value given a name that can be prefixed with 'data-'.
+     * @private
+     * @function
      * @param {Element} el
-     * @param {String} name
-     * @return {String|null}
+     * @param {string} name
+     * @return {string|null}
      */
     function getAttribute(el, name) {
       return el.getAttribute(name) || el.getAttribute('data-' + name) || null;
@@ -41,8 +43,8 @@
     /**
      * Open a link via the In App Browser plugin.
      * @private
-     * @function open
-     * @param {String} target - A valid In App Browser target value.
+     * @function
+     * @param {string} target - A valid In App Browser target value.
      */
     function open(target) {
       // Allow the target to be overridden using a (data-)iab-target attribute.
@@ -53,7 +55,7 @@
     /**
      * Open a link via the Email Composer plugin.
      * @private
-     * @function compose
+     * @function
      */
     function compose() {
       $cordovaEmailComposer.open({ to: this.href.split(':').pop() });
@@ -62,22 +64,22 @@
     /**
      * Open a link in the In App Browser with system as the target.
      * @private
-     * @function system
+     * @function
      */
     var system = _.partial(open, '_system');
 
     /**
      * Open a link in the In App Browser with blank as the target.
      * @private
-     * @function system
+     * @function
      */
     var blank = _.partial(open, '_blank');
 
     /**
      * Open a link via the Email Composer plugin or the system browser.
      * @private
-     * @function mail
-     * @param {Object} event - A DOM click event object.
+     * @function
+     * @param {object} event - A DOM click event object.
      */
     function mail(event) {
       var promise = null;

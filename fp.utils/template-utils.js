@@ -6,9 +6,9 @@
 
   /**
    * The template utils service provider.
-   * @constructor TemplateUtilsProvider
-   * @param {String} MODULES_PATH - The default modules path.
-   * @param {String} MODULE_NAME_SEPARATOR - The default module name separator.
+   * @constructor
+   * @param {string} MODULES_PATH - The default modules path.
+   * @param {string} MODULE_NAME_SEPARATOR - The default module name separator.
    */
   function TemplateUtilsProvider(MODULES_PATH, MODULE_NAME_SEPARATOR) {
     var provider = this;
@@ -18,15 +18,13 @@
 
     /**
      * Get the modules path prefix.
-     * @method getModulesPath
-     * @return {String}
+     * @return {string}
      */
     provider.getModulesPath = function () { return modulesPath; };
 
     /**
      * Set the modules path prefix.
-     * @method setModulesPath
-     * @param {String} path
+     * @param {string} path
      */
     provider.setModulesPath = function (path) {
       if (_.isString(path)) { modulesPath = path; }
@@ -34,8 +32,7 @@
 
     /**
      * Get the module name separator.
-     * @method getModuleNameSeparator
-     * @return {String}
+     * @return {string}
      */
     provider.getModuleNameSeparator = function () {
       return moduleNameSeparator;
@@ -43,8 +40,7 @@
 
     /**
      * Set the module name separator.
-     * @method setModuleNameSeparator
-     * @param {String} separator
+     * @param {string} separator
      */
     provider.setModuleNameSeparator = function (separator) {
       if (_.isString(separator)) { moduleNameSeparator = separator; }
@@ -52,9 +48,8 @@
 
     /**
      * Get the URL of a given Angular module.
-     * @method getModuleUrl
-     * @param {Object} module
-     * @return {String}
+     * @param {object} module
+     * @return {string}
      */
     provider.getModuleUrl = function (module) {
       return modulesPath + module.name + '/';
@@ -62,9 +57,8 @@
 
     /**
      * Get the last part of the given module name.
-     * @method getLastModuleNamePart
-     * @param {Object} module
-     * @return {String}
+     * @param {object} module
+     * @return {string}
      */
     provider.getLastModuleNamePart = function (module) {
       return module.name.split(moduleNameSeparator).pop();
@@ -72,12 +66,11 @@
 
     /**
      * Get a template URL from a given Angular module.
-     * @method getUrlFromModule
-     * @param {Object} module
-     * @param {String} [file] - Last part of the module name by default.
-     *                        If the value ends with a forward slash, the
-     *                        last part of the module name will be added.
-     * @return {String}
+     * @param {object} module
+     * @param {string} [file] - Last part of the module name by default.
+     *   If the value ends with a forward slash, the last part
+     *   of the module name will be added.
+     * @return {string}
      */
     provider.getUrlFromModule = function (module, file) {
       if (!_.isString(file)) { file = ''; }
@@ -88,47 +81,42 @@
 
     /**
      * The template utils service.
-     * @constructor TemplateUtils
+     * @constructor
      */
     function TemplateUtils() {
       var service = this;
 
       /**
        * Get the modules path prefix.
-       * @method getModulesPath
-       * @return {String}
+       * @return {string}
        */
       service.getModulesPath = provider.getModulesPath;
 
       /**
        * Get the module name separator.
-       * @method getModuleNameSeparator
-       * @return {String}
+       * @return {string}
        */
       service.getModuleNameSeparator = provider.getModuleNameSeparator;
 
       /**
        * Get the URL of a given Angular module.
-       * @method getModuleUrl
-       * @param {Object} module
-       * @return {String}
+       * @param {object} module
+       * @return {string}
        */
       service.getModuleUrl = provider.getModuleUrl;
 
       /**
        * Get the last part of the given module name.
-       * @method getLastModuleNamePart
-       * @param {Object} module
-       * @return {String}
+       * @param {object} module
+       * @return {string}
        */
       service.getLastModuleNamePart = provider.getLastModuleNamePart;
 
       /**
        * Get a template URL from a given Angular module.
-       * @method getUrlFromModule
-       * @param {Object} module
-       * @param {String} [file] - Last part of the module name by default.
-       * @return {String}
+       * @param {object} module
+       * @param {string} [file] - Last part of the module name by default.
+       * @return {string}
        */
       service.getUrlFromModule = provider.getUrlFromModule;
     }

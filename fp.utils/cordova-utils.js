@@ -8,20 +8,41 @@
 
   /**
    * Some Cordova utilities.
-   * @constructor CordovaUtils
-   * @param {Object} $q - The Angular $q service.
-   * @param {Object} $rootScope - The Angular root scope object.
-   * @param {Object} $ionicPlatform - The Ionic $ionicPlatform service.
-   * @param {Object} $cordovaToast - The ngCordova $cordovaToast service.
+   * @constructor
+   * @param {object} $q - The Angular $q service.
+   * @param {object} $log - The Angular $log service.
+   * @param {object} $window - The Angular $window service.
+   * @param {object} $rootScope - The Angular root scope object.
+   * @param {object} $ionicPlatform - The Ionic $ionicPlatform service.
+   * @param {object} $cordovaToast - The ngCordova $cordovaToast service.
+   * @param {object} interceptorUtils - The interceptorUtils service.
+   * @param {object} ERRORS - Error messages.
    */
-  function CordovaUtils($q, $rootScope, $ionicPlatform, $cordovaToast) {
+  function CordovaUtils(
+    $q,
+    $log,
+    $window,
+    $rootScope,
+    $ionicPlatform,
+    $cordovaToast,
+    interceptorUtils,
+    ERRORS
+  ) {
     var service = this;
+
+    var ionic = $window.ionic;
+    var _ = $window._;
+
+    if (!ionic || !_) { return $log.error(ERRORS.MISSING_GLOBALS); }
+
+    var platformReady = $ionicPlatform.ready();
 
     /**
      * Get root scope broadcaters given event names.
-     * @method getBroadcaster
-     * @param {String|Array} name
-     * @return {Function|Object}
+     * @private
+     * @function
+     * @param {string|string[]} name
+     * @return {Function|object}
      */
     function getBroadcaster(name) {
       var isArray = _.isArray(name);
@@ -32,25 +53,32 @@
 
     /**
      * Check whether the app is running in a WebView or not.
-     * @method isCordova
-     * @return {Boolean}
+     * @return {boolean}
      */
     service.isCordova = function () { return ionic.Platform.isWebView(); };
 
     /**
+     * Check whether the app is running on a given platform or not.
+     * @param {string|string[]} name
+     * @return {boolean}
+     */
+    service.isPlatform = function (name) {
+      function checkPlatform(name) { return $ionicPlatform.is(name); }
+      return _.some(interceptorUtils.toArray(name), checkPlatform);
+    }
+
+    /**
      * Call a given callback when Cordova is available and ready.
-     * @method callWhenReady
      * @param {Function} cb
      * @return {Promise}
      */
     service.callWhenReady = function (cb) {
-      if (service.isCordova()) { return $ionicPlatform.ready().then(cb); }
+      if (service.isCordova()) { return platformReady.then(cb); }
       return $q.reject(new Error('App not running inside Cordova'));
     };
 
     /**
      * Get a callback that would be called when Cordova is available and ready.
-     * @method whenReady
      * @param {Function} cb
      * @return {Function}
      */
@@ -62,9 +90,22 @@
     };
 
     /**
+     * Get a callback that would be called when Cordova is available and ready,
+     * only if the current platform matches the one given as a parameter
+     * otherwise just pass an optional fallback value.
+     * @param {string|string[]} platform
+     * @param {Function} cb
+     * @param {any} [fallback]
+     * @return {Function}
+     */
+    service.ifPlatformWhenReady = function (platform, cb, fallback) {
+      var matches = service.isPlatform(platform);
+      return service.whenReady(matches ? cb : _.partial(_.identity, fallback));
+    }
+
+    /**
      * Show a toast at the center of the screen for a short duration.
-     * @method showToast
-     * @param {String} message
+     * @param {string} message
      * @return {Promise}
      */
     service.showToast = service.whenReady(function (message) {
@@ -77,7 +118,7 @@
       var broadcast = getBroadcaster(['paused', 'resumed']);
       $ionicPlatform.on('resume', broadcast.resumed);
       $ionicPlatform.on('pause', broadcast.paused);
-      if (!ionic.Platform.isIOS()) { return; }
+      if (!service.isPlatform('ios')) { return; }
       $ionicPlatform.on('active', broadcast.resumed);
       $ionicPlatform.on('resign', broadcast.paused);
     });
@@ -85,9 +126,13 @@
 
   module.service('cordovaUtils', [
     '$q',
+    '$log',
+    '$window',
     '$rootScope',
     '$ionicPlatform',
     '$cordovaToast',
+    'interceptorUtils',
+    'FP_UTILS_ERRORS',
     CordovaUtils
   ]);
 
